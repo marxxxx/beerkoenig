@@ -2,4 +2,12 @@
   Die Bierverkostung ist abgeschlossen!
 </h3>
 
-<p>Hier siehst du deine Ergebnisse:</p>
+
+<ng-container *ngIf="contest && contest.results">
+  <p>Hier siehst du deine Ergebnisse:</p>
+  <div *ngFor="let b of contest.results">
+    <span>{{b.number}}</span> <span>{{b.beerId}}</span> <span>{{b.vote}}</span>
+  </div>
+
+  <!-- TODO: Visualize correct and wrong results -->
+</ng-container>

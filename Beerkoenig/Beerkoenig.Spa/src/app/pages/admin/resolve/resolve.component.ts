@@ -66,6 +66,7 @@ export class ResolveComponent implements OnInit, OnDestroy {
     this.isBusyCompleting = true;
     this.adminService.completeContest(this.contest.id, this.result).subscribe(r => {
       this.isBusyCompleting = false;
+      this.router.navigate(['/completed', this.contest.id]);
     }, e => {
       this.isBusyCompleting = false;
       console.error(e);

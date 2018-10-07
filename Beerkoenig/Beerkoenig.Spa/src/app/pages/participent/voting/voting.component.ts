@@ -48,15 +48,15 @@ export class VotingComponent implements OnInit {
       this.contest = r;
       this.isBusy = false;
 
-      if (this.state) {
-        if (!this.state.currentResult || this.state.currentResult.length === 0) {
-          this.state.currentResult = this.utilService.initResolveResult(r);
-        }
-      }
 
       if (this.contest.state === BeerContestState.Completed) {
-        this.router.navigate(['/result']);
+        this.router.navigate(['/result', contestId]);
       }
+
+      if (!this.state.currentResult || this.state.currentResult.length === 0) {
+        this.state.currentResult = this.utilService.initResolveResult(r);
+      }
+
     }, e => {
       this.isBusy = false;
       console.error(e);

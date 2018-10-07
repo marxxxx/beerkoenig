@@ -5,7 +5,7 @@
 
 <p>Ergebnis:</p>
 
-<div *ngFor="let b of contest.result">
-  {{b.number}} {{b.beerId}} {{b.vote}}
+<div *ngFor="let b of contest.results">
+  <span>{{b.number}}</span> <span>{{b.beerId}}</span> <span>{{b.vote}}</span>
 </div>
 </ng-container>
