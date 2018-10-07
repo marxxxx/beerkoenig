@@ -1,0 +1,10 @@
+<div>
+    <p>
+      {{result.number}}.
+    </p>
+  
+    <select [(ngModel)]="result.beerId">
+      <option *ngFor="let b of beers" [value]="b.id">{{b.id}}</option>
+    </select>
+        
+  </div>

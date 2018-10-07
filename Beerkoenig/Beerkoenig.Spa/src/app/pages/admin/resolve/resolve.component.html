@@ -1,0 +1,11 @@
+<ng-container *ngIf="contest">
+  <h3>{{contest.title}} Auflösung</h3>
+
+  <p>Bitte die ausgeschenkten Biere in der richtigen Reihenfolge erfassen:</p>
+  
+  <ng-container *ngIf="result">
+    <app-beer-resolve *ngFor="let b of result" [beers]="contest.beers" [result]="b"></app-beer-resolve>
+  </ng-container>
+
+  <button [disabled]="!isValid()" (click)="onResolve()">Auflösen</button>
+</ng-container>

@@ -1,0 +1,27 @@
+<h3>
+  Bierverkostung starten
+</h3>
+
+<p *ngIf="!isStarted">Um die Bierverkostung zu starten bitte folgenden Knopf drücken:</p>
+
+<button (click)="onStart()" *ngIf="!isBusy && !isStarted">Starten</button>
+
+
+<div *ngIf="isStarted">
+  <p>Die Bierverkostung ist gestarted!</p>
+
+  <p>Wichtig!</p>
+
+
+  <div>
+    <p>Folgenden Link an deine Teilnehmer schicken:</p>
+    <textarea #participentArea>{{participentLink}}</textarea>
+    <button (click)="onCopyToClipboard(participentArea)">In Zwischenablage kopieren</button>
+  </div>
+
+  <div>
+      <p>Unter folgendem Link kannst du die Verkostung auflösen und abschließen:</p>
+      <textarea #resolveArea>{{resolveLink}}</textarea>
+      <button (click)="onCopyToClipboard(resolveArea)">In Zwischenablage kopieren</button>
+    </div>
+</div>

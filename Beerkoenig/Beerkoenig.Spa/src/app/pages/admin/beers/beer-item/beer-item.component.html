@@ -1,0 +1,17 @@
+<div>
+
+  <div>
+    <label>Biername</label>
+    <p *ngIf="!isEditable">
+      {{beer.id}}
+    </p>
+    <input type="text" [(ngModel)]="beer.id" *ngIf="isEditable">
+  </div>
+  <div>
+    <label>Beschreibung</label>
+    <p *ngIf="!isEditable">
+      {{beer.description}}
+    </p>
+    <input type="text" [(ngModel)]="beer.description" *ngIf="isEditable">
+  </div>
+</div>

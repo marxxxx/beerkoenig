@@ -1,5 +1,5 @@
 export interface BeerDefinitionModel {
-    Id: string;
-    Description: string;
-    ImageUrl: string;
+    id?: string;
+    description?: string;
+    imageUrl?: string;
 }

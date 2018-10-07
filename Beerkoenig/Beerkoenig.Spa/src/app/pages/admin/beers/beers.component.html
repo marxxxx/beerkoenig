@@ -1,0 +1,23 @@
+<h3>Bierauswahl</h3>
+
+
+<div *ngIf="contest">
+  <p>Ausgeschenkte Bieranzahl:</p>
+  <input type="number" [(ngModel)]="contest.beerCount">
+</div>
+
+<h5>Bierliste</h5>
+<div *ngIf="contest">
+  <div *ngFor="let b of contest.beers">
+    <app-beer-item [beer]="b" [isEditable]="true">
+    </app-beer-item>
+    <button (click)="onDelete(b.id)" *ngIf="!isBusy">Delete</button>
+  </div>
+</div>
+
+<button *ngIf="!isBusy" (click)="onAdd()">Bier hinzufügen</button>
+
+<button *ngIf="!isBusy" [disabled]="!contest || contest.beerCount <= 0 || contest.beers == 0" (click)="onCreate()">Bierverkostung
+  anlegen</button>
+
+<p *ngIf="isBusy">Bierverkostung wird angelegt ...</p>

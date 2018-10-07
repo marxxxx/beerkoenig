@@ -1,0 +1,11 @@
+<h3>Bierverkostung anlegen</h3>
+
+<form #createForm="ngForm">
+  <p>Bitte gib der Bierverkostung einen Namen:</p>
+  <input type="text" [(ngModel)]="contest.title" required name="title">
+
+  <p>Und wie heißt du?</p>
+  <input type="text" [(ngModel)]="contest.creatorUserName" required name="creatorName">
+
+  <button [disabled]="createForm.invalid" (click)="onCreate()">Anlegen</button>
+</form>

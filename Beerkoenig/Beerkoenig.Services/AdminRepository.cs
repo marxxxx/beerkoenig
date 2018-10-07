@@ -29,7 +29,7 @@ namespace Beerkoenig.Services
                 throw new ArgumentException($"Invalid beer results!");
             }
             entity.Entity.State = BeerContestState.Completed;
-            entity.Entity.Results = results.ToList();
+            entity.Entity.Results = results.ToList(); //TODO: Calculate votes per based on participent results
 
             var table = StorageAccessService.GetTableReference(TableName);
             TableOperation operation = TableOperation.Replace(entity);

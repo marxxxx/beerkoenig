@@ -31,6 +31,10 @@ namespace Beerkoenig.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Guid>> Post([FromBody] BeerContestModel contest)
         {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
             var contestId = await this.AdminRepository.CreateContestAsync(contest);
             return contestId;
         }

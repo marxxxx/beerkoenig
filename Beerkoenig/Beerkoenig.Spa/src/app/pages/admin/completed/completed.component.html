@@ -1,0 +1,11 @@
+<ng-container *ngIf="contest">
+<h3>{{contest.title}}</h3>
+
+<p>Diese Bierverkostung ist bereits abgeschlossen!</p>
+
+<p>Ergebnis:</p>
+
+<div *ngFor="let b of contest.result">
+  {{b.number}} {{b.beerId}} {{b.vote}}
+</div>
+</ng-container>

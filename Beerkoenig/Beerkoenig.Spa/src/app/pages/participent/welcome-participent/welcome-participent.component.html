@@ -1,0 +1,15 @@
+<p *ngIf="isBusy">Bierverkostung wird geladen ...</p>
+<div *ngIf="!isBusy">
+  <h3>
+    Willkommen zu {{contest.title}} von {{contest.creatorUserName}}!
+  </h3>
+
+  <form #startForm="ngForm">
+    <p>Um zu beginnen gib bitte deinen Namen an:</p>
+    <input type="text" [(ngModel)]="userName" required name="userName" [disabled]="isBusyCreating">
+    <p *ngIf="isErrorCreatingParticipent">Dieser Benutzername ist bereits vergeben. Bitte wähle einen anderen Namen.</p>
+
+    <button *ngIf="!isBusyCreating" [disabled]="startForm.invalid" (click)="onCreateParticipent()">Starten</button>
+  </form>
+
+</div>

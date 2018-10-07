@@ -1,0 +1,14 @@
+<ng-container *ngIf="contest">
+  <h3>
+    {{contest.title}}
+  </h3>
+
+  <ng-container *ngIf="state && state.currentResult">
+    <div *ngFor="let b of state.currentResult">
+      <app-beer-vote [beers]="contest.beers" [result]="b" (resultChanged)="onResultChanged($event)"></app-beer-vote>
+    </div>
+  </ng-container>
+
+  <button [disabled]="isBusySaving" (click)="onSave()">Speichern</button>
+
+</ng-container>
