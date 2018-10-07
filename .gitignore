@@ -328,3 +328,5 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+/Beerkoenig/Beerkoenig.Api/appsettings.json
+/Beerkoenig/Beerkoenig.Api/appsettings.Development.json

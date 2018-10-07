@@ -1,0 +1,37 @@
+Data Model
+----------
+
+* Table: admin
+PK: Guid (Contest-ID)
+RK: string (Creator-UserName)
+
+Json: {
+"Title": string,
+"State": Created | InProgress | Completed
+	"Beers": [{
+	"Name: "", /* Key */
+	"Description":"",
+	"ImageUrl":""
+	}],
+"BeerCount": number
+"Results": [
+	{"Number": number,
+	"Name": string
+	}]
+}
+
+
+
+
+
+* Table: result
+PK: Guid (Contest-ID)
+RK: string (UserName)
+Json: {
+Results: [ {
+	"Number": number,
+	"Name": string,
+	"Vote": number
+	}
+	]
+}

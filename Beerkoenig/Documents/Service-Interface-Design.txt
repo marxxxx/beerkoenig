@@ -1,0 +1,17 @@
+Service Interface Design
+------------------------
+
+AdminRepository
+
+- contestId CreateContest(definiton)
+- GetContestDefinition(contestId)
+- StartContest(contestId)
+- CompleteContest(contestId, results)
+
+
+ParticipentRepository
+
+- CreateParticipent(contestId, userName)
+- SaveResults(contestId, userName, results)
+
+
