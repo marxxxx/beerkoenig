@@ -44,5 +44,12 @@ namespace Beerkoenig.Services
             var table = this.StorageAccessService.GetTableReference(TableName);
             await table.ExecuteAsync(operation);
         }
+
+        public async Task<List<ParticipentModel>> GetParticipentsForContestAsync(Guid contestId)
+        {
+            var whereClause = TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, contestId.ToString());
+            var result = await this.StorageAccessService.QueryTableAsync<JsonTableEntity<ParticipentModel>>(TableName, whereClause);
+            return result.Select(r => r.Entity).ToList();
+        }
     }
 }

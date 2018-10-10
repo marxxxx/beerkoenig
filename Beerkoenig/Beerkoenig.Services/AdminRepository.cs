@@ -14,10 +14,12 @@ namespace Beerkoenig.Services
         private const string TableName = "admin";
 
         public StorageAccessService StorageAccessService { get; }
+        public IContestRepository ContestRepository { get; }
 
-        public AdminRepository(StorageAccessService storageAccessService)
+        public AdminRepository(StorageAccessService storageAccessService, IContestRepository contestRepository)
         {
             this.StorageAccessService = storageAccessService ?? throw new ArgumentNullException(nameof(storageAccessService));
+            this.ContestRepository = contestRepository ?? throw new ArgumentNullException(nameof(contestRepository));
         }
 
 
@@ -28,8 +30,24 @@ namespace Beerkoenig.Services
             {
                 throw new ArgumentException($"Invalid beer results!");
             }
+
+            // sum up votes per participent
+            var participents = await ContestRepository.GetParticipentsForContestAsync(contestId);
+            foreach(var r in results)
+            {
+                r.Vote = participents.SelectMany(p => p.Results).Where(p=>p.BeerId == r.BeerId).Sum(b=>b.Vote);
+            }
+
             entity.Entity.State = BeerContestState.Completed;
-            entity.Entity.Results = results.ToList(); //TODO: Calculate votes per based on participent results
+            entity.Entity.Results = results.ToList();
+
+            // find winner
+            foreach(var p in participents)
+            {
+                
+            }
+
+
 
             var table = StorageAccessService.GetTableReference(TableName);
             TableOperation operation = TableOperation.Replace(entity);

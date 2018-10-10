@@ -10,5 +10,6 @@ namespace Beerkoenig.Services.Interfaces
     {
         Task CreateParticipentAsync(Guid contestId, string userName);
         Task SaveResultsAsync(Guid contestId, string userName, IEnumerable<BeerResultModel> results);
+        Task<List<ParticipentModel>> GetParticipentsForContestAsync(Guid contestId);
     }
 }
