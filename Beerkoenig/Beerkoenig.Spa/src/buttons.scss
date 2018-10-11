@@ -1,0 +1,42 @@
+button {
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    color: #414141;
+    display: block;
+    width: 80%;
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #f0ece2;
+    border: 2px solid #DD9333;
+    border-radius: 5px;
+    padding: .5rem 2rem;
+    transition: 200ms ease; 
+
+    &:hover:not([disabled]) {
+        background-color: #ffd5a5;
+        transform: scale(1.1);
+
+        &::after {
+            transform: scaleX(1.4) scaleY(1.6);
+            opacity: 0;
+        }
+    }
+
+    &:active:not([disabled]) {
+        transform: scale(1.0);
+    }
+
+    &:disabled {
+        border: 2px solid #ffd5a5;
+        color: hsla(201, 15%, 41%, 0.5);
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+
+    button {
+        width: 92%;
+    }
+}

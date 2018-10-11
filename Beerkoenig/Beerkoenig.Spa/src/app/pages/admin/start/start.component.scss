@@ -1,0 +1,25 @@
+@import "~src/buttons";
+
+textarea {
+    border: 1px solid #ffd5a5;
+    border-radius: 5px;
+    width: 80%;
+    height: 3rem;
+    margin-bottom: .3rem;
+}
+
+button {
+    margin-bottom: 2rem;
+}
+
+p#wichtig {
+    text-decoration: underline;
+    letter-spacing: .05rem;
+    text-transform: uppercase;
+    color: #414141;
+}
+
+
+p {
+    color: #545455;
+}
