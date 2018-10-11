@@ -1,0 +1,22 @@
+@import "~src/inputs";
+
+select {
+    width: 25%;
+}
+
+div {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+p {
+    margin-right: 1rem;
+    margin-top: .5rem;
+}
+
+@media screen and (max-width: 900px) {
+    select {
+        width: 70%;
+    }
+}
