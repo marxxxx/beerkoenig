@@ -17,6 +17,8 @@ import { BeerItemComponent } from './pages/admin/beers/beer-item/beer-item.compo
 import { BeerVoteComponent } from './pages/participent/voting/beer-vote/beer-vote.component';
 import { BeerResolveComponent } from './pages/admin/resolve/beer-resolve/beer-resolve.component';
 import { CompletedComponent } from './pages/admin/completed/completed.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { CompletedComponent } from './pages/admin/completed/completed.component'
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]
