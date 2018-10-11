@@ -1,12 +1,18 @@
-<div>
-  <p>
-    {{result.number}}.
-  </p>
+<div class="voteBeer">
 
-  <select [(ngModel)]="result.beerId">
-    <option *ngFor="let b of beers" [value]="b.id">{{b.id}}</option>
-  </select>
+  <div class="selectBeer">
+    <p>
+      Bier Nr. <span class="beer-number">{{result.number}}</span>
+    </p>
 
-  <input type="number" [(ngModel)]="result.vote">
+    <select [(ngModel)]="result.beerId">
+      <option *ngFor="let b of beers" [value]="b.id">{{b.id}}</option>
+    </select>
+  </div>
+
+  <div >
+    <p class="voteTaste">Geschmack (0-10)</p>
+    <input class="vote" type="number" min="1" max="10" [(ngModel)]="result.vote">
+  </div>
 
 </div>

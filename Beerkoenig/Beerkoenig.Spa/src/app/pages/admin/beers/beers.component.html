@@ -3,7 +3,7 @@
 
 <div *ngIf="contest">
   <p>Ausgeschenkte Bieranzahl:</p>
-  <input type="number" [(ngModel)]="contest.beerCount">
+  <input type="number" min="1" max="35" [(ngModel)]="contest.beerCount">
 </div>
 
 <h5>Bierliste</h5>
@@ -17,7 +17,7 @@
 
 <button *ngIf="!isBusy" (click)="onAdd()">Bier hinzufügen</button>
 
-<button *ngIf="!isBusy" [disabled]="!contest || contest.beerCount <= 0 || contest.beers == 0" (click)="onCreate()">Bierverkostung
+<button  id="disabled"   *ngIf="!isBusy" [disabled]="!contest || contest.beerCount <= 0 || contest.beers == 0" (click)="onCreate()">Bierverkostung
   anlegen</button>
 
 <p *ngIf="isBusy">Bierverkostung wird angelegt ...</p>

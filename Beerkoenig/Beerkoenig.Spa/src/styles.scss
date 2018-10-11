@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+html {
+    background-color: #f0ece2;
+    font-family: 'Montserrat', sans-serif;
+    color: #414141;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+body {
+    margin: 1.5%;
+}
+
+@media screen and (max-width: 992px) {
+    body {
+        margin: 8%;
+    }
+    
+    html {
+        font-size: 1rem;
+    }
+  }
+
+
