@@ -1,4 +1,5 @@
-﻿using Beerkoenig.Services.Models;
+﻿using Beerkoenig.Services.Entitys;
+using Beerkoenig.Services.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +12,7 @@ namespace Beerkoenig.Services.Interfaces
         Task<Guid> CreateContestAsync(BeerContestModel contest);
         Task<BeerContestModel> GetContestDefinitionAsync(Guid contestId);
         Task StartContestAsync(Guid contestId);
-        Task CompleteContest(Guid contestId, IEnumerable<BeerResultModel> results);
+        Task<JsonTableEntity<BeerContestModel>> GetContestDefinitionEntityAsync(Guid contestId);
+        Task UpdateContestEntityAsync(JsonTableEntity<BeerContestModel> entity);
     }
 }

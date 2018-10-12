@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Beerkoenig.Services.Models
@@ -25,13 +24,9 @@ namespace Beerkoenig.Services.Models
         public Guid Id { get; set; }
         public BeerContestState State { get; set; }
         public DateTime Timestamp { get; set; }
-        [Required]
         public string CreatorUserName { get; set; }
-        [Required]
         public string Title { get; set; }
-        [Required]
         public int BeerCount { get; set; }
-        [Required]
         public List<BeerDefinitionModel> Beers { get; set; }
         public List<BeerResultModel> Results { get; set; }
 

@@ -13,10 +13,12 @@ namespace Beerkoenig.Api.Controllers
     public class AdminController : ControllerBase
     {
         public IAdminRepository AdminRepository { get; }
+        public IAdminService AdminService { get; set; }
 
-        public AdminController(IAdminRepository adminRepository)
+        public AdminController(IAdminRepository adminRepository, IAdminService adminService)
         {
             this.AdminRepository = adminRepository ?? throw new ArgumentNullException(nameof(adminRepository));
+            this.AdminService = adminService ?? throw new ArgumentNullException(nameof(adminService));
         }
 
         
@@ -51,7 +53,7 @@ namespace Beerkoenig.Api.Controllers
         [HttpPut("{id}/complete")]
         public async Task<ActionResult> CompleteContest(Guid id, [FromBody]List<BeerResultModel> result)
         {
-            await this.AdminRepository.CompleteContest(id, result);
+            await this.AdminService.CompleteContestAsync(id, result);
             return Ok();
         }
     }

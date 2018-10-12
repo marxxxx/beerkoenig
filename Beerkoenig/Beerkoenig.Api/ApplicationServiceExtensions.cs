@@ -20,7 +20,9 @@ namespace Beerkoenig.Api
             services.AddSingleton(config);
             services.AddScoped<StorageAccessService>();
             services.AddScoped<IAdminRepository, AdminRepository>();
+            services.AddScoped<IAdminService, AdminService>();
             services.AddScoped<IContestRepository, ContestRepository>();
+            services.AddScoped<IContestResultRepository, ContestResultRepository>();
         }
     }
 }

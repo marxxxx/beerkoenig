@@ -23,36 +23,7 @@ namespace Beerkoenig.Services
         }
 
 
-        public async Task CompleteContest(Guid contestId, IEnumerable<BeerResultModel> results)
-        {
-            var entity = await StorageAccessService.GetTableEntityAsync<JsonTableEntity<BeerContestModel>>(TableName, contestId.ToString(), contestId.ToString());
-            if (results == null || results.Count() < entity.Entity.BeerCount)
-            {
-                throw new ArgumentException($"Invalid beer results!");
-            }
-
-            // sum up votes per participent
-            var participents = await ContestRepository.GetParticipentsForContestAsync(contestId);
-            foreach(var r in results)
-            {
-                r.Vote = participents.SelectMany(p => p.Results).Where(p=>p.BeerId == r.BeerId).Sum(b=>b.Vote);
-            }
-
-            entity.Entity.State = BeerContestState.Completed;
-            entity.Entity.Results = results.ToList();
-
-            // find winner
-            foreach(var p in participents)
-            {
-                
-            }
-
-
-
-            var table = StorageAccessService.GetTableReference(TableName);
-            TableOperation operation = TableOperation.Replace(entity);
-            await table.ExecuteAsync(operation);
-        }
+        
 
         public async Task<Guid> CreateContestAsync(BeerContestModel contest)
         {
@@ -69,8 +40,14 @@ namespace Beerkoenig.Services
 
         public async Task<BeerContestModel> GetContestDefinitionAsync(Guid contestId)
         {
-            var entity = await StorageAccessService.GetTableEntityAsync<JsonTableEntity<BeerContestModel>>(TableName, contestId.ToString(), contestId.ToString());
+            var entity = await GetContestDefinitionEntityAsync(contestId);
             return entity.Entity;
+        }
+
+        public async Task<JsonTableEntity<BeerContestModel>> GetContestDefinitionEntityAsync(Guid contestId)
+        {
+            var entity = await StorageAccessService.GetTableEntityAsync<JsonTableEntity<BeerContestModel>>(TableName, contestId.ToString(), contestId.ToString());
+            return entity;
         }
 
         public async Task StartContestAsync(Guid contestId)
@@ -78,6 +55,13 @@ namespace Beerkoenig.Services
             var entity = await StorageAccessService.GetTableEntityAsync<JsonTableEntity<BeerContestModel>>(TableName, contestId.ToString(), contestId.ToString());
             entity.Entity.State = BeerContestState.InProgress;
 
+            var table = StorageAccessService.GetTableReference(TableName);
+            TableOperation operation = TableOperation.Replace(entity);
+            await table.ExecuteAsync(operation);
+        }
+
+        public async Task UpdateContestEntityAsync(JsonTableEntity<BeerContestModel> entity)
+        {
             var table = StorageAccessService.GetTableReference(TableName);
             TableOperation operation = TableOperation.Replace(entity);
             await table.ExecuteAsync(operation);
