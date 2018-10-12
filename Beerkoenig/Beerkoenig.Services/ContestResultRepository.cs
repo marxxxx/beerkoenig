@@ -47,6 +47,7 @@ namespace Beerkoenig.Services
             var result = await GetAllParticipentResultsAsync(contestId);
             var contestResults = result.GroupBy(g => g.UserName)
                 .Select(g => new ContestResultModel(g.Key, g.Count(r => r.IsCorrect)))
+                .OrderByDescending(r=>r.CorrectBeers)
                 .ToList();
             return contestResults;
         }

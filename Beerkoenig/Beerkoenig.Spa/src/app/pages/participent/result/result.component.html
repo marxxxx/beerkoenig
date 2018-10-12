@@ -4,9 +4,19 @@
 
 
 <ng-container *ngIf="contest && contest.results">
-  <p>Hier siehst du deine Ergebnisse:</p>
+  <p>Hier die am Besten bewerteten Biere:</p>
   <div *ngFor="let b of contest.results">
     <span>{{b.number}}</span> <span>{{b.beerId}}</span> <span>{{b.vote}}</span>
+  </div>
+
+  <p>Das sind deine Ergebnisse</p>
+  <div *ngFor="let r of participentResult">
+    <span>{{r.beerNumber}}</span> <span>{{r.beerId}}</span> <span>{{r.isCorrect}}</span>
+  </div>
+
+  <p>Hier die Gesamtergebnisse</p>
+  <div *ngFor="let r of contestResult">
+    <span>{{r.userName}}</span> <span>{{r.correctBeers}}</span>
   </div>
 
   <!-- TODO: Visualize correct and wrong results -->
