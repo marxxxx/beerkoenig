@@ -1,5 +1,5 @@
 import { ContestState } from '../../models/ContestState';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +7,8 @@ import { Injectable } from '@angular/core';
 export class ContestStateService {
 
   readonly key = 'contest_';
+
+  contestFinished$: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
 

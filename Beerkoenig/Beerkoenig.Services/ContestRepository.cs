@@ -22,9 +22,9 @@ namespace Beerkoenig.Services
         }
                 
 
-        public Task CreateParticipentAsync(Guid contestId, string userName)
+        public Task CreateParticipentAsync(Guid contestId, CreateParticipentModel participent)
         {
-            var participentEntity = new JsonTableEntity<ParticipentModel>(contestId.ToString(), userName, new ParticipentModel(contestId, userName));
+            var participentEntity = new JsonTableEntity<ParticipentModel>(contestId.ToString(), participent.UserName, new ParticipentModel(contestId, participent.UserName, participent.PushInfo));
             var table = this.StorageAccessService.GetTableReference(TableName);
 
             var operation = TableOperation.Insert(participentEntity);

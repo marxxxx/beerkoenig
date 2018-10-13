@@ -31,7 +31,7 @@ namespace Beerkoenig.Services
 
         public Task SaveContestResultsAsync(Guid contestId, List<ParticipentResultModel> result)
         {
-            var entities = result.Select(r => new ParticipentResultEntity(contestId.ToString(), r.UserName, r.BeerNumber, r.BeerId, r.IsCorrect));
+            var entities = result.Select(r => new ParticipentResultEntity(contestId.ToString(), r.UserName, r.BeerNumber, r.BeerId, r.IsCorrect)).ToList();
             var table = StorageAccessService.GetTableReference(TableName);
             var operation = new TableBatchOperation();
             foreach(var e in entities)

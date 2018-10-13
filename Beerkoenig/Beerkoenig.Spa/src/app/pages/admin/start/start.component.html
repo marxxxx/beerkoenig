@@ -17,13 +17,13 @@
 
   <div>
     <p>Folgenden Link an deine Teilnehmer schicken:</p>
-    <textarea #participentArea>{{participentLink}}</textarea>
+    <textarea #participentArea readonly="true">{{participentLink}}</textarea>
     <button (click)="onCopyToClipboard(participentArea)">In Zwischenablage kopieren</button>
   </div>
 
   <div>
       <p>Unter folgendem Link kannst du die Verkostung auflösen und abschließen:</p>
-      <textarea #resolveArea>{{resolveLink}}</textarea>
+      <textarea #resolveArea readonly="true">{{resolveLink}}</textarea>
       <button (click)="onCopyToClipboard(resolveArea)">In Zwischenablage kopieren</button>
     </div>
 </div>

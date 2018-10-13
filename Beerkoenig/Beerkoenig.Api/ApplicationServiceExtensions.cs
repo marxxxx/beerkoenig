@@ -23,6 +23,7 @@ namespace Beerkoenig.Api
             services.AddScoped<IAdminService, AdminService>();
             services.AddScoped<IContestRepository, ContestRepository>();
             services.AddScoped<IContestResultRepository, ContestResultRepository>();
+            services.AddSingleton<INotificationService, NotificationService>();
         }
     }
 }

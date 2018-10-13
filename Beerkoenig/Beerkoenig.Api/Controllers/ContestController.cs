@@ -19,10 +19,10 @@ namespace Beerkoenig.Api.Controllers
             this.ContestRepository = contestRepository ?? throw new ArgumentNullException(nameof(contestRepository));
         }
 
-        [HttpPost("{contestId}/{userName}")]
-        public async Task<ActionResult> CreateParticipent(Guid contestId, string userName)
+        [HttpPost("{contestId}")]
+        public async Task<ActionResult> CreateParticipent(Guid contestId, [FromBody]CreateParticipentModel participent)
         {
-            await this.ContestRepository.CreateParticipentAsync(contestId, userName);
+            await this.ContestRepository.CreateParticipentAsync(contestId, participent);
             return Ok();
         }
 
