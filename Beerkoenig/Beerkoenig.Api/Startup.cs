@@ -64,9 +64,15 @@ namespace Beerkoenig.Api
 
             app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
 
+            // Azure SignalR service
+            app.UseAzureSignalR(routes =>
+            {
+                routes.MapHub<NotificationHub>("/notification");
+            });
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
         }
     }
 }

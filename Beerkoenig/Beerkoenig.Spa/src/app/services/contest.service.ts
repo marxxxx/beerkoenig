@@ -10,7 +10,7 @@ import { PushInfoModel } from 'src/models/PushInfoModel';
 })
 export class ContestService {
 
-  readonly baseUrl = environment.baseUrl + 'contest/';
+  readonly baseUrl = environment.baseApiUrl + 'contest/';
 
   constructor(private http: HttpClient) { }
 

@@ -59,7 +59,10 @@ export class WelcomeParticipentComponent implements OnInit, OnDestroy {
       this.isBusy = false;
 
       if (this.contest.state === BeerContestState.Completed) {
-        this.router.navigate(['/result']);
+        this.router.navigate(['/result', contestId]);
+      }
+      if (this.contest.state === BeerContestState.InProgress && this.state.getContestState(contestId) != null ) {
+        this.router.navigate(['/voting', contestId]);
       }
       console.log(r);
 

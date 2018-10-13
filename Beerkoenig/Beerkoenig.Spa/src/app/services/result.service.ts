@@ -10,7 +10,7 @@ import { ParticipentResultModel } from '../../models/ParticipentResultModel';
 })
 export class ResultService {
 
-  readonly baseUrl = environment.baseUrl + 'result/';
+  readonly baseUrl = environment.baseApiUrl + 'result/';
 
   constructor(private http: HttpClient) { }
 

@@ -1,14 +1,19 @@
 <app-progress-spinner *ngIf="isBusy"></app-progress-spinner>
 
-<div *ngIf="!isBusy">
+<div *ngIf="!isBusy && contest">
   <h3>
     Willkommen zu {{contest.title}} von {{contest.creatorUserName}}!
   </h3>
 
+  <div id="welcome-animation-container">
+    <app-welcome-animation></app-welcome-animation>
+  </div>
+
   <form #startForm="ngForm">
     <p>Um zu beginnen gib bitte deinen Namen an:</p>
     <input type="text" [(ngModel)]="userName" required name="userName" [disabled]="isBusyCreating">
-    <p *ngIf="isErrorCreatingParticipent"> <strong>Dieser Benutzername ist bereits vergeben. Bitte wähle einen anderen Namen.</strong> </p>
+    <p *ngIf="isErrorCreatingParticipent"> <strong>Dieser Benutzername ist bereits vergeben. Bitte wähle einen anderen
+        Namen.</strong> </p>
 
     <button *ngIf="!isBusyCreating" [disabled]="startForm.invalid" (click)="onCreateParticipent()">Starten</button>
   </form>

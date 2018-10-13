@@ -24,6 +24,9 @@ namespace Beerkoenig.Api
             services.AddScoped<IContestRepository, ContestRepository>();
             services.AddScoped<IContestResultRepository, ContestResultRepository>();
             services.AddSingleton<INotificationService, NotificationService>();
+
+            services.AddSignalR().AddAzureSignalR(config.SignalRConnectionString);
+
         }
     }
 }

@@ -28,6 +28,7 @@ import 'hammerjs';
 import { TasteResultsComponent } from './components/taste-results/taste-results.component';
 import { ParticipentResultsComponent } from './components/participent-results/participent-results.component';
 import { ContestResultsComponent } from './components/contest-results/contest-results.component';
+import { WelcomeAnimationComponent } from './components/welcome-animation/welcome-animation.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { ContestResultsComponent } from './components/contest-results/contest-re
     ProgressSpinnerComponent,
     TasteResultsComponent,
     ParticipentResultsComponent,
-    ContestResultsComponent
+    ContestResultsComponent,
+    WelcomeAnimationComponent
   ],
   imports: [
     BrowserModule,

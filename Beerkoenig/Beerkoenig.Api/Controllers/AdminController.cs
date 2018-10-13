@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Beerkoenig.Services.Interfaces;
 using Beerkoenig.Services.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Beerkoenig.Api.Controllers
 {
@@ -14,11 +15,13 @@ namespace Beerkoenig.Api.Controllers
     {
         public IAdminRepository AdminRepository { get; }
         public IAdminService AdminService { get; set; }
+        public IHubContext<NotificationHub> HubContext { get; }
 
-        public AdminController(IAdminRepository adminRepository, IAdminService adminService)
+        public AdminController(IAdminRepository adminRepository, IAdminService adminService, IHubContext<NotificationHub> hubContext)
         {
             this.AdminRepository = adminRepository ?? throw new ArgumentNullException(nameof(adminRepository));
             this.AdminService = adminService ?? throw new ArgumentNullException(nameof(adminService));
+            this.HubContext = hubContext ?? throw new ArgumentNullException(nameof(hubContext));
         }
 
         
@@ -54,6 +57,7 @@ namespace Beerkoenig.Api.Controllers
         public async Task<ActionResult> CompleteContest(Guid id, [FromBody]List<BeerResultModel> result)
         {
             await this.AdminService.CompleteContestAsync(id, result);
+            await this.HubContext.Clients.All.SendAsync("contestFinished", id.ToString());
             return Ok();
         }
     }
