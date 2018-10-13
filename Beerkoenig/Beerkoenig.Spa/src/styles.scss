@@ -1,3 +1,14 @@
+
+// GENERAL
+// ############################################################################
+
+$spacing: 1em;
+$mobile: 600px;
+$tablet: 1280px;
+
+$border-radius: 5px;
+
+
 /* You can add global styles to this file, and also import other style files */
 html {
     background-color: #f0ece2;
@@ -21,4 +32,14 @@ body {
     }
   }
 
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Roboto', sans-serif; }
+
+// centered container
+.centered-container {
+    max-width: $tablet;
+    margin: 0 auto;
+}
 

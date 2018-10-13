@@ -5,6 +5,7 @@ import { CreateStateService } from '../../../services/create-state.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from '../../../services/admin.service';
 import { environment } from '../../../../environments/environment';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-start',
@@ -25,7 +26,8 @@ export class StartComponent implements OnInit, OnDestroy {
     private admin: AdminService,
     private state: CreateStateService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private snackbar: MatSnackBar) { }
 
   ngOnInit() {
 
@@ -64,5 +66,8 @@ export class StartComponent implements OnInit, OnDestroy {
     console.log(el);
     el.select();
     document.execCommand('copy');
+    this.snackbar.open('Link in Zwischenablage kopiert', null, {
+      duration: 1000
+    });
   }
 }

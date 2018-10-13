@@ -1,0 +1,32 @@
+<table mat-table [dataSource]="results" class="mat-elevation-z1">
+
+  <!-- Number Column -->
+  <ng-container matColumnDef="beerNumber">
+    <th mat-header-cell *matHeaderCellDef>No.</th>
+    <td mat-cell *matCellDef="let element"> {{element.beerNumber}} </td>
+  </ng-container>
+
+  <!-- Beer Column -->
+  <ng-container matColumnDef="beerId">
+    <th mat-header-cell *matHeaderCellDef>Deine Abstimmung</th>
+    <td mat-cell *matCellDef="let element">{{element.beerId}}</td>
+  </ng-container>
+
+  <!-- Correct Beer -->
+  <ng-container matColumnDef="correctBeerId">
+      <th mat-header-cell *matHeaderCellDef>Richtige Abstimmung</th>
+      <td mat-cell *matCellDef="let element">{{getCorrectBeerByNumber(element.beerNumber)?.beerId}}</td>
+    </ng-container>
+
+  <!-- Result -->
+  <ng-container matColumnDef="result">
+    <th mat-header-cell *matHeaderCellDef>Ergebnis</th>
+    <td mat-cell *matCellDef="let element">
+      <mat-icon class="correct" *ngIf="element.isCorrect">check</mat-icon>
+      <mat-icon class="incorrect" *ngIf="!element.isCorrect">close</mat-icon>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

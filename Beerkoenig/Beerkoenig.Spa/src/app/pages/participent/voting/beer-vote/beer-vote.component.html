@@ -10,9 +10,10 @@
     </select>
   </div>
 
-  <div >
-    <p class="voteTaste">Geschmack (0-10)</p>
-    <input class="vote" type="number" min="1" max="10" [(ngModel)]="result.vote">
+  <div>
+    <p class="voteTaste">Geschmack: ({{result.vote}})</p>
+    <mat-slider min="0" max="10" [(ngModel)]="result.vote"></mat-slider>
+    <!-- <input class="vote" type="number" min="1" max="10" [(ngModel)]="result.vote"> -->
   </div>
 
 </div>

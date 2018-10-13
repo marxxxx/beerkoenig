@@ -1,0 +1,28 @@
+@import '~@angular/material/theming';
+@import '../../../styles.scss';
+
+:host {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  > div {
+    height: 100%;
+  }
+}
+
+.spinner-container {
+  background: #fff;
+  border-radius: 50%;
+  height: 64px;
+  margin: 0 auto 16px auto;
+  padding: 8px;
+  width: 64px;
+  @include mat-elevation(2);
+}
+
+img {
+  width: 64px;
+}

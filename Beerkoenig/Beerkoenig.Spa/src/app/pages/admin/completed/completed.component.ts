@@ -3,6 +3,8 @@ import { BeerContestModel } from '../../../../models/BeerContestModel';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from '../../../services/admin.service';
+import { ResultService } from 'src/app/services/result.service';
+import { ContestResultModel } from 'src/models/ContestResultModel';
 
 @Component({
   selector: 'app-completed',
@@ -13,13 +15,13 @@ export class CompletedComponent implements OnInit {
 
 
   contest: BeerContestModel;
+  contestResult: ContestResultModel[];
   subs: Subscription[] = [];
   isBusy = false;
 
 
-
   constructor(private route: ActivatedRoute, private router: Router,
-    private adminService: AdminService) { }
+    private adminService: AdminService, private resultService: ResultService) { }
 
   ngOnInit() {
     this.subs.push(this.route.paramMap.subscribe(p => {
@@ -40,6 +42,15 @@ export class CompletedComponent implements OnInit {
       this.isBusy = false;
       console.error(e);
     });
+
+
+    this.resultService.getContestResults(contestId)
+      .subscribe(r => {
+        this.contestResult = r;
+      }, e => {
+        console.error(e);
+      });
+
   }
 
 }

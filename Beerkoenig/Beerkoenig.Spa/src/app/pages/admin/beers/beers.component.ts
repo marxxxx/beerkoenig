@@ -29,6 +29,10 @@ export class BeersComponent implements OnInit, OnDestroy {
       if (this.contest.beers == null) {
         this.contest.beers = [];
       }
+
+      if (!this.contest.beerCount) {
+        this.contest.beerCount = 1;
+      }
     }));
   }
 
@@ -62,6 +66,18 @@ export class BeersComponent implements OnInit, OnDestroy {
       console.error('error creating contest');
       this.isBusy = false;
     });
+  }
 
+  isValid(): boolean {
+    if (!this.contest || !this.contest.beers) {
+      return false;
+    }
+
+    if ((this.contest.beers.length >= this.contest.beerCount) &&
+      (this.contest.beers.every(b => b.id != null && b.id.length > 0))) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

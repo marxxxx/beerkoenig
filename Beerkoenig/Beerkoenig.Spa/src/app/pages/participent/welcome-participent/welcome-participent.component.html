@@ -1,4 +1,5 @@
-<p *ngIf="isBusy">Bierverkostung wird geladen ...</p>
+<app-progress-spinner *ngIf="isBusy"></app-progress-spinner>
+
 <div *ngIf="!isBusy">
   <h3>
     Willkommen zu {{contest.title}} von {{contest.creatorUserName}}!

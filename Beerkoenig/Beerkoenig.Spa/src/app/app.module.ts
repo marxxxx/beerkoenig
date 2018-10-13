@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +19,15 @@ import { BeerResolveComponent } from './pages/admin/resolve/beer-resolve/beer-re
 import { CompletedComponent } from './pages/admin/completed/completed.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProgressSpinnerComponent } from './components/progress-spinner/progress-spinner.component';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatButtonModule , MatIconModule, MatCardModule, MatSnackBarModule, MatTableModule } from '@angular/material';
+import 'hammerjs';
+import { TasteResultsComponent } from './components/taste-results/taste-results.component';
+import { ParticipentResultsComponent } from './components/participent-results/participent-results.component';
+import { ContestResultsComponent } from './components/contest-results/contest-results.component';
 
 @NgModule({
   declarations: [
@@ -34,14 +43,26 @@ import { environment } from '../environments/environment';
     BeerItemComponent,
     BeerVoteComponent,
     BeerResolveComponent,
-    CompletedComponent
+    CompletedComponent,
+    ProgressSpinnerComponent,
+    TasteResultsComponent,
+    ParticipentResultsComponent,
+    ContestResultsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    FlexLayoutModule,
+    MatSliderModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+    MatSnackBarModule,
+    MatTableModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

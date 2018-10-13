@@ -12,7 +12,7 @@ namespace Beerkoenig.Services.Entitys
         }
 
         public ParticipentResultEntity(string contestId, string userName, int beerNumber, string beerId, bool isCorrect)
-            :base(contestId, $"{userName}|{beerId}")
+            :base(contestId, $"{userName}|{beerNumber}")
         {
             ContestId = contestId ?? throw new ArgumentNullException(nameof(contestId));
             UserName = userName ?? throw new ArgumentNullException(nameof(userName));

@@ -38,7 +38,6 @@ export class CreateComponent implements OnInit, OnDestroy {
 
   onCreate() {
     this.state.setState(this.contest);
-
     this.router.navigate(['/beers']);
   }
 }

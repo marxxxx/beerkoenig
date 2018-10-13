@@ -1,11 +1,13 @@
+<app-progress-spinner *ngIf="isBusy"></app-progress-spinner>
 <ng-container *ngIf="contest">
-<h3>{{contest.title}}</h3>
+  <h3>{{contest.title}}</h3>
 
-<p>Diese Bierverkostung ist bereits abgeschlossen!</p>
+  <p>Diese Bierverkostung ist bereits abgeschlossen!</p>
 
-<p id="ergebnis">Ergebnis:</p>
+  <p id="ergebnis">Ergebnis:</p>
+  <app-taste-results [results]="contest.results"></app-taste-results>
 
-<div *ngFor="let b of contest.results">
-  <span>{{b.number}}</span> <span>{{b.beerId}}</span> <span>{{b.vote}}</span>
-</div>
+  <p>Siegerliste:</p>
+  <app-contest-results [results]="contestResult"></app-contest-results>
+
 </ng-container>
