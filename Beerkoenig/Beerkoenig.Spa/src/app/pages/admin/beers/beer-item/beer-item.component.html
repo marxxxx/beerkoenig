@@ -7,11 +7,27 @@
     </p>
     <input type="text" [(ngModel)]="beer.id" *ngIf="isEditable">
   </div>
-  <!-- <div>
+
+  <div>
     <label>Beschreibung</label>
     <p *ngIf="!isEditable">
       {{beer.description}}
     </p>
     <input type="text" [(ngModel)]="beer.description" *ngIf="isEditable">
-  </div> -->
+  </div>
+
+  <button *ngIf="!beer.imageUrl && !isBusyUploading" (click)="fileUpload.click()">
+    Foto hochladen
+  </button>
+  <button *ngIf="beer.imageUrl && !isBusyUploading" (click)="beer.imageUrl = null;">Foto entfernen</button>
+
+
+  <input type="file" #fileUpload name="upname" ng2FileSelect [uploader]="uploader" (change)="handleUpload($event)"
+    style="display:none;" />
+
+
+  <img *ngIf="beer.imageUrl" [src]="beer.imageUrl">
+
+  <mat-progress-spinner *ngIf="isBusyUploading" mode="indeterminate" color="accent" diameter="32"></mat-progress-spinner>
+
 </div>

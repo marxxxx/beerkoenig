@@ -23,4 +23,27 @@ export class BeerVoteComponent implements OnInit {
   ngOnInit() {
   }
 
+  getBeerImageUrl(): string {
+    if (!this.result.beerId) {
+      return null;
+    }
+
+    return this.getResultBeer().imageUrl;
+  }
+
+  getBeerDescription(): string {
+    if (!this.result.beerId) {
+      return null;
+    }
+
+    return this.getResultBeer().description;
+  }
+
+  onResultChanged() {
+    this.resultChanged.emit(this.result);
+  }
+
+  getResultBeer(): BeerDefinitionModel {
+    return this.beers.filter(b => b.id === this.result.beerId)[0];
+  }
 }

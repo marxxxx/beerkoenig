@@ -5,15 +5,20 @@
       Bier Nr. <span class="beer-number">{{result.number}}</span>
     </p>
 
-    <select [(ngModel)]="result.beerId">
+    <!-- Selection of beers -->
+    <select [(ngModel)]="result.beerId" (change)="onResultChanged()">
       <option *ngFor="let b of beers" [value]="b.id">{{b.id}}</option>
     </select>
   </div>
 
+  <!-- Tastyness -->
   <div>
     <p class="voteTaste">Geschmack: <span *ngIf="result.vote"> ({{result.vote}})</span></p>
     <mat-slider min="0" max="10" [(ngModel)]="result.vote"></mat-slider>
-    <!-- <input class="vote" type="number" min="1" max="10" [(ngModel)]="result.vote"> -->
   </div>
 
 </div>
+
+<!-- Beer Image -->
+<img *ngIf="getBeerImageUrl()" [src]="getBeerImageUrl()">
+<p>{{getBeerDescription()}}</p>

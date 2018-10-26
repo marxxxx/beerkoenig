@@ -21,8 +21,6 @@ export class VotingComponent implements OnInit {
   contest: BeerContestModel;
   subs: Subscription[] = [];
   isBusy = false;
-  isBusySaving = false;
-
 
   constructor(private route: ActivatedRoute, private router: Router,
     private stateService: ContestStateService,
@@ -69,15 +67,13 @@ export class VotingComponent implements OnInit {
   }
 
   onSave() {
-    this.isBusySaving = true;
     this.stateService.setContestState(this.contest.id, this.state);
 
     this.contestService.saveResults(this.contest.id, this.state.userName, this.state.currentResult).subscribe(r => {
 
-      this.isBusySaving = false;
+      console.log('results saved successfully');
     }, e => {
 
-      this.isBusySaving = false;
       console.error(e);
 
     });

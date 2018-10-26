@@ -41,7 +41,7 @@ export class BeersComponent implements OnInit, OnDestroy {
   }
 
   onAdd() {
-    this.contest.beers.push({ id: 'bier nummer ' + (this.contest.beers.length + 1), description: '' });
+    this.contest.beers.push({ id: '', description: '' });
   }
 
   onDelete(id: string) {

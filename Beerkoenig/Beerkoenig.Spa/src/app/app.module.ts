@@ -23,12 +23,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProgressSpinnerComponent } from './components/progress-spinner/progress-spinner.component';
 import { MatSliderModule } from '@angular/material/slider';
-import { MatButtonModule , MatIconModule, MatCardModule, MatSnackBarModule, MatTableModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatCardModule, MatSnackBarModule, MatTableModule, MatProgressSpinnerModule, MatDividerModule } from '@angular/material';
 import 'hammerjs';
 import { TasteResultsComponent } from './components/taste-results/taste-results.component';
 import { ParticipentResultsComponent } from './components/participent-results/participent-results.component';
 import { ContestResultsComponent } from './components/contest-results/contest-results.component';
 import { WelcomeAnimationComponent } from './components/welcome-animation/welcome-animation.component';
+import { FileUploadModule } from 'ng2-file-upload';
+import { Ng2ImgMaxModule } from 'ng2-img-max';
 
 @NgModule({
   declarations: [
@@ -63,8 +65,12 @@ import { WelcomeAnimationComponent } from './components/welcome-animation/welcom
     MatCardModule,
     MatSnackBarModule,
     MatTableModule,
+    MatDividerModule,
+    MatProgressSpinnerModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FileUploadModule,
+    Ng2ImgMaxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
