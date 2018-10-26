@@ -16,18 +16,18 @@
     <input type="text" [(ngModel)]="beer.description" *ngIf="isEditable">
   </div>
 
-  <button *ngIf="!beer.imageUrl && !isBusyUpoading" (click)="fileUpload.click()">
+  <button *ngIf="!beer.imageUrl && !isBusyUploading" (click)="fileUpload.click()">
     Foto hochladen
   </button>
-  <button *ngIf="beer.imageUrl && !isBusyUpoading" (click)="beer.imageUrl = null;">Foto entfernen</button>
+  <button *ngIf="beer.imageUrl && !isBusyUploading" (click)="beer.imageUrl = null;">Foto entfernen</button>
 
 
-  <input type="file" #fileUpload name="upname" ng2FileSelect [uploader]="uploader" (change)="handleUpload($event).bind(this)"
+  <input type="file" #fileUpload name="upname" ng2FileSelect [uploader]="uploader" (change)="handleUpload($event)"
     style="display:none;" />
 
 
   <img *ngIf="beer.imageUrl" [src]="beer.imageUrl">
 
-  <mat-progress-spinner *ngIf="isBusyUpoading" mode="indeterminate" diameter="32"></mat-progress-spinner>
+  <mat-progress-spinner *ngIf="isBusyUploading" mode="indeterminate" diameter="32"></mat-progress-spinner>
 
 </div>
