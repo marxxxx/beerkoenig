@@ -17,7 +17,7 @@ export class BeerItemComponent implements OnInit {
   @Input()
   isEditable: boolean;
 
-  private uploader: FileUploader;
+  uploader: FileUploader;
   isBusyUploading = false;
 
 
