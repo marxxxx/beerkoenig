@@ -4,6 +4,7 @@ using Beerkoenig.Services.Models;
 using Microsoft.WindowsAzure.Storage.Table;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -65,6 +66,11 @@ namespace Beerkoenig.Services
             var table = StorageAccessService.GetTableReference(TableName);
             TableOperation operation = TableOperation.Replace(entity);
             await table.ExecuteAsync(operation);
+        }
+
+        public Task<string> UploadBeerImageAsync(string extension, Stream imageStream)
+        {
+            return StorageAccessService.SaveFileInBlobStorage("img", "beers", extension, imageStream);
         }
     }
 }

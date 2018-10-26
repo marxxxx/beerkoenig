@@ -32,4 +32,9 @@ export class AdminService {
     const url = `${this.baseUrl}${id}/complete`;
     return this.http.put(url, result);
   }
+
+  getBeerImageUploadUrl(): string {
+    const url = `${this.baseUrl}UploadBeerImage`;
+    return url;
+  }
 }

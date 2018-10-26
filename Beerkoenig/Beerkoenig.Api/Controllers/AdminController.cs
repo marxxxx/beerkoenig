@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Beerkoenig.Services.Interfaces;
+﻿using Beerkoenig.Services.Interfaces;
 using Beerkoenig.Services.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Beerkoenig.Api.Controllers
 {
@@ -24,7 +25,7 @@ namespace Beerkoenig.Api.Controllers
             this.HubContext = hubContext ?? throw new ArgumentNullException(nameof(hubContext));
         }
 
-        
+
         [HttpGet("{id}")]
         public async Task<ActionResult<BeerContestModel>> Get(Guid id)
         {
@@ -32,11 +33,11 @@ namespace Beerkoenig.Api.Controllers
             return result;
         }
 
-        
+
         [HttpPost]
         public async Task<ActionResult<Guid>> Post([FromBody] BeerContestModel contest)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
@@ -44,7 +45,7 @@ namespace Beerkoenig.Api.Controllers
             return contestId;
         }
 
-        
+
         [HttpPut("{id}/start")]
         public async Task<ActionResult> StartContest(Guid id)
         {
@@ -52,13 +53,23 @@ namespace Beerkoenig.Api.Controllers
             return Ok();
         }
 
-        
+
         [HttpPut("{id}/complete")]
         public async Task<ActionResult> CompleteContest(Guid id, [FromBody]List<BeerResultModel> result)
         {
             await this.AdminService.CompleteContestAsync(id, result);
             await this.HubContext.Clients.All.SendAsync("contestFinished", id.ToString());
             return Ok();
+        }
+
+        [HttpPost("[action]")]
+        public async Task<ActionResult<string>> UploadBeerImage(IFormFile file)
+        {
+            using (var strm = file.OpenReadStream())
+            {
+                string fileUri = await this.AdminRepository.UploadBeerImageAsync(Path.GetExtension(file.FileName), strm);
+                return fileUri;
+            }
         }
     }
 }
