@@ -14,7 +14,7 @@
   <!-- Tastyness -->
   <div>
     <p class="voteTaste">Geschmack: <span *ngIf="result.vote"> ({{result.vote}})</span></p>
-    <mat-slider min="0" max="10" [(ngModel)]="result.vote"></mat-slider>
+    <mat-slider min="0" max="10" [(ngModel)]="result.vote" (change)="onResultChanged()"></mat-slider>
   </div>
 
 </div>
