@@ -69,6 +69,8 @@ export class VotingComponent implements OnInit {
   onSave() {
     this.stateService.setContestState(this.contest.id, this.state);
 
+    console.log(this.state.currentResult);
+
     this.contestService.saveResults(this.contest.id, this.state.userName, this.state.currentResult).subscribe(r => {
 
       console.log('results saved successfully');
