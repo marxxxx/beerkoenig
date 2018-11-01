@@ -28,18 +28,13 @@ export class ResultComponent implements OnInit {
     private resultService: ResultService) { }
 
   ngOnInit() {
-    this.subs.push(this.route.paramMap.subscribe(p => {
+    const contestId = this.route.snapshot.paramMap.get('contestId');
+    this.userName = this.route.snapshot.queryParamMap.get('userName');
+    this.load(contestId);
 
-      const contestId = p.get('contestId');
-      this.userName = p.get('userName');
-
-      this.load(contestId);
-
-      if (this.userName) {
-        this.loadParticipentResults(contestId, this.userName);
-      }
-
-    }));
+    if (this.userName) {
+      this.loadParticipentResults(contestId, this.userName);
+    }
   }
 
   load(contestId: string) {

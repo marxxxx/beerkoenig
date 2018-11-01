@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'beers', component: BeersComponent },
   { path: 'start/:contestId', component: StartComponent },
   { path: 'resolve/:contestId', component: ResolveComponent },
-  { path: 'welcome-participent/:contestId', component: WelcomeParticipentComponent },
+  { path: ':contestId', component: WelcomeParticipentComponent },
   { path: 'voting/:contestId', component: VotingComponent },
   { path: 'result/:contestId', component: ResultComponent },
   { path: '', redirectTo: '/welcome', pathMatch: 'full'}

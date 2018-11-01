@@ -51,7 +51,7 @@ export class StartComponent implements OnInit, OnDestroy {
       this.isBusy = false;
       this.isStarted = true;
 
-      this.participentLink = `${environment.frontendUrl}/welcome-participent/${this.contestId}`;
+      this.participentLink = `${environment.frontendUrl}/${this.contestId}`;
       this.resolveLink =  `${environment.frontendUrl}/resolve/${this.contestId}`;
 
     }, e => {
