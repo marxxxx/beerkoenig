@@ -6,6 +6,7 @@ import { AdminService } from '../../../services/admin.service';
 import { ResultService } from '../../../services/result.service';
 import { ContestResultModel } from '../../../../models/ContestResultModel';
 import { ParticipentResultModel } from '../../../../models/ParticipentResultModel';
+import { ContestStateService } from 'src/app/services/contest-state.service';
 
 @Component({
   selector: 'app-result',
@@ -25,12 +26,22 @@ export class ResultComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private adminService: AdminService,
+    private state: ContestStateService,
     private resultService: ResultService) { }
 
   ngOnInit() {
     const contestId = this.route.snapshot.paramMap.get('contestId');
-    this.userName = this.route.snapshot.queryParamMap.get('userName');
     this.load(contestId);
+
+    this.userName = this.route.snapshot.queryParamMap.get('userName');
+
+    // fallback for older links without username in query params
+    if (!this.userName) {
+      const contestState = this.state.getContestState(contestId);
+      if (contestState) {
+        this.userName = contestState.userName;
+      }
+    }
 
     if (this.userName) {
       this.loadParticipentResults(contestId, this.userName);
