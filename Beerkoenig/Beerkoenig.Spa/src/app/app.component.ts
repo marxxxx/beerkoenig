@@ -30,6 +30,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
     this.subs.push(this.pushService.messages.subscribe((m: any) => {
+      console.log(m);
       if (m.notification && m.notification.body) {
         this.snackbar.open(m.notification.body, 'OK');
         this.contestStateService.contestFinished$.next();

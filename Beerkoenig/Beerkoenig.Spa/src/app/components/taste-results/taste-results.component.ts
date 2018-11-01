@@ -12,11 +12,25 @@ export class TasteResultsComponent implements OnInit {
   results: BeerResultModel[];
 
 
-  displayedColumns = ['number', 'beerId', 'vote'];
+  displayedColumns = ['vote', 'beerId' ];
 
   constructor() { }
 
   ngOnInit() {
+    console.log('before sorting');
+    console.log(this.results);
+    this.results = this.results.sort((r1, r2) => {
+      if (r1.vote > r2.vote) {
+        return -1;
+      } else if (r2.vote > r1.vote) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
+    );
+    console.log('after sorting');
+    console.log(this.results);
   }
 
 }
