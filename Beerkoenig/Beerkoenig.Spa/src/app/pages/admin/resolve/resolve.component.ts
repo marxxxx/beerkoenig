@@ -48,7 +48,7 @@ export class ResolveComponent implements OnInit, OnDestroy {
       this.isBusy = false;
 
       if (this.contest.state === BeerContestState.Completed) {
-        this.router.navigate(['/completed', contestId]);
+        this.router.navigate(['/result', contestId]);
       } else {
 
         this.result = this.resolveStateService.getState(contestId);
@@ -66,7 +66,7 @@ export class ResolveComponent implements OnInit, OnDestroy {
     this.isBusyCompleting = true;
     this.adminService.completeContest(this.contest.id, this.result).subscribe(r => {
       this.isBusyCompleting = false;
-      this.router.navigate(['/completed', this.contest.id]);
+      this.router.navigate(['/result', this.contest.id]);
     }, e => {
       this.isBusyCompleting = false;
       console.error(e);

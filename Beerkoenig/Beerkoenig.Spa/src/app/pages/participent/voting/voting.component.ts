@@ -36,7 +36,7 @@ export class VotingComponent implements OnInit {
       this.load(contestId);
 
       this.subs.push(this.stateService.contestFinished$.subscribe(_ => {
-        this.router.navigate(['/result', contestId]);
+        this.router.navigate(['/result', contestId], {queryParams: { userName: this.state.userName}});
 
       }));
     }));
@@ -53,7 +53,7 @@ export class VotingComponent implements OnInit {
 
 
       if (this.contest.state === BeerContestState.Completed) {
-        this.router.navigate(['/result', contestId]);
+        this.router.navigate(['/result', contestId], {queryParams: { userName: this.state.userName}});
       }
 
       if (!this.state.currentResult || this.state.currentResult.length === 0) {
