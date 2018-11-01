@@ -23,7 +23,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProgressSpinnerComponent } from './components/progress-spinner/progress-spinner.component';
 import { MatSliderModule } from '@angular/material/slider';
-import { MatButtonModule, MatIconModule, MatCardModule, MatSnackBarModule, MatTableModule, MatProgressSpinnerModule, MatDividerModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatCardModule, MatSnackBarModule, MatTableModule, MatProgressSpinnerModule, MatDividerModule, MatSortModule } from '@angular/material';
 import 'hammerjs';
 import { TasteResultsComponent } from './components/taste-results/taste-results.component';
 import { ParticipentResultsComponent } from './components/participent-results/participent-results.component';
@@ -67,6 +67,7 @@ import { Ng2ImgMaxModule } from 'ng2-img-max';
     MatTableModule,
     MatDividerModule,
     MatProgressSpinnerModule,
+    MatSortModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     BrowserAnimationsModule,
     FileUploadModule,

@@ -40,7 +40,15 @@ namespace Beerkoenig.Services
             var participents = await ContestRepository.GetParticipentsForContestAsync(contestId);
             foreach (var r in results)
             {
-                r.Vote = participents.SelectMany(p => p.Results).Where(p => p.BeerId == r.BeerId).Sum(b => b.Vote);
+                foreach(var p in participents)
+                {
+                    var votesForBeer = p.Results.Where(pr => pr.BeerId == r.BeerId);
+                    if(votesForBeer.Any())
+                    {
+                        // only count max vote per beer
+                        r.Vote += votesForBeer.Max(pr => pr.Vote);
+                    }
+                }
             }
 
             contestEntity.Entity.State = BeerContestState.Completed;

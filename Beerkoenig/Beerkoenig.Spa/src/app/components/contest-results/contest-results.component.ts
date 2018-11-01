@@ -12,7 +12,7 @@ export class ContestResultsComponent implements OnInit {
   results: ContestResultModel[];
 
 
-  displayedColumns = ['userName', 'correctBeers'];
+  displayedColumns = ['correctBeers', 'userName'];
 
   constructor() { }
 
