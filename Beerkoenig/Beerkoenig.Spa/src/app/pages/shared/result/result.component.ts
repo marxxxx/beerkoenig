@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { BeerContestModel } from '../../../../models/BeerContestModel';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AdminService } from '../../../services/admin.service';
 import { ResultService } from '../../../services/result.service';
 import { ContestResultModel } from '../../../../models/ContestResultModel';
 import { ParticipentResultModel } from '../../../../models/ParticipentResultModel';
-import { ContestStateService } from '../../../services/contest-state.service';
 
 @Component({
   selector: 'app-result',
@@ -20,21 +19,22 @@ export class ResultComponent implements OnInit {
   subs: Subscription[] = [];
   isBusy = false;
   contestResult: ContestResultModel[] = [];
-  participentResult: ParticipentResultModel[] = [];
+  participentResult: ParticipentResultModel[];
+  userName: string;
 
 
-  constructor(private route: ActivatedRoute, private router: Router,
+  constructor(private route: ActivatedRoute,
     private adminService: AdminService,
-    private resultService: ResultService,
-    private stateService: ContestStateService) { }
+    private resultService: ResultService) { }
 
   ngOnInit() {
-    this.subs.push(this.route.paramMap.subscribe(p => {
+    const contestId = this.route.snapshot.paramMap.get('contestId');
+    this.userName = this.route.snapshot.queryParamMap.get('userName');
+    this.load(contestId);
 
-      const contestId = p.get('contestId');
-      this.load(contestId);
-
-    }));
+    if (this.userName) {
+      this.loadParticipentResults(contestId, this.userName);
+    }
   }
 
   load(contestId: string) {
@@ -49,15 +49,6 @@ export class ResultComponent implements OnInit {
     });
 
 
-    const state = this.stateService.getContestState(contestId);
-
-    this.resultService.getParticipentResults(contestId, state.userName)
-      .subscribe(r => {
-        this.participentResult = r;
-      }, e => {
-        console.error(e);
-      });
-
 
     this.resultService.getContestResults(contestId)
       .subscribe(r => {
@@ -68,6 +59,16 @@ export class ResultComponent implements OnInit {
 
 
 
+  }
+
+  loadParticipentResults(contestId: string, userName: string) {
+
+    this.resultService.getParticipentResults(contestId, userName)
+      .subscribe(r => {
+        this.participentResult = r;
+      }, e => {
+        console.error(e);
+      });
   }
 
 }

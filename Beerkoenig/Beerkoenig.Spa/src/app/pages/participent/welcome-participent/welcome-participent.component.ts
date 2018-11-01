@@ -36,8 +36,13 @@ export class WelcomeParticipentComponent implements OnInit, OnDestroy {
     this.subs.push(this.route.paramMap.subscribe(p => {
 
       const contestId = p.get('contestId');
-      this.load(contestId);
 
+      const contestState = this.state.getContestState(contestId);
+      if (contestState && contestState.userName) {
+        this.userName = contestState.userName;
+      }
+
+      this.load(contestId);
     }));
 
     this.swPush.requestSubscription({ serverPublicKey: this.VALID_PUBLIC_KEY }).then(r => {
@@ -59,9 +64,9 @@ export class WelcomeParticipentComponent implements OnInit, OnDestroy {
       this.isBusy = false;
 
       if (this.contest.state === BeerContestState.Completed) {
-        this.router.navigate(['/result', contestId]);
+        this.router.navigate(['/result', contestId, this.userName]);
       }
-      if (this.contest.state === BeerContestState.InProgress && this.state.getContestState(contestId) != null ) {
+      if (this.contest.state === BeerContestState.InProgress && this.state.getContestState(contestId) != null) {
         this.router.navigate(['/voting', contestId]);
       }
       console.log(r);

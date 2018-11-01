@@ -12,18 +12,18 @@ import { StartComponent } from './pages/admin/start/start.component';
 import { ResolveComponent } from './pages/admin/resolve/resolve.component';
 import { WelcomeParticipentComponent } from './pages/participent/welcome-participent/welcome-participent.component';
 import { VotingComponent } from './pages/participent/voting/voting.component';
-import { ResultComponent } from './pages/participent/result/result.component';
+import { ResultComponent } from './pages/shared/result/result.component';
 import { BeerItemComponent } from './pages/admin/beers/beer-item/beer-item.component';
 import { BeerVoteComponent } from './pages/participent/voting/beer-vote/beer-vote.component';
 import { BeerResolveComponent } from './pages/admin/resolve/beer-resolve/beer-resolve.component';
-import { CompletedComponent } from './pages/admin/completed/completed.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProgressSpinnerComponent } from './components/progress-spinner/progress-spinner.component';
 import { MatSliderModule } from '@angular/material/slider';
-import { MatButtonModule, MatIconModule, MatCardModule, MatSnackBarModule, MatTableModule, MatProgressSpinnerModule, MatDividerModule, MatSortModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatCardModule, MatSnackBarModule} from '@angular/material';
+import { MatTableModule, MatProgressSpinnerModule, MatDividerModule, MatSortModule } from '@angular/material';
 import 'hammerjs';
 import { TasteResultsComponent } from './components/taste-results/taste-results.component';
 import { ParticipentResultsComponent } from './components/participent-results/participent-results.component';
@@ -46,7 +46,6 @@ import { Ng2ImgMaxModule } from 'ng2-img-max';
     BeerItemComponent,
     BeerVoteComponent,
     BeerResolveComponent,
-    CompletedComponent,
     ProgressSpinnerComponent,
     TasteResultsComponent,
     ParticipentResultsComponent,
