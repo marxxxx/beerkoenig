@@ -3,26 +3,38 @@
 
 input {
     display: block;
-    margin-left:auto;
-    margin-right:auto;
-    margin-top: .12rem;
+    width: 100% !important;
+    // margin-left:auto;
+    // margin-right:auto;
+    // margin-top: .12rem;
 }
 
-div {
-    margin-top: 1rem;
-}
+// div {
+//     margin-top: 1rem;
+// }
 
 label {
     color: #545455;
 }
 
 img {
-    margin-top: 10px;
-    width: 100px;
-    height: 100px;
+    max-width: 200px;
+    max-height: 200px;
+    cursor: pointer;
 }
 
 mat-progress-spinner {
     margin-left: auto;
     margin-right: auto;
+}
+
+#closeBtn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+
+#closeBtn:hover {
+    transform: scale(1.2);
 }

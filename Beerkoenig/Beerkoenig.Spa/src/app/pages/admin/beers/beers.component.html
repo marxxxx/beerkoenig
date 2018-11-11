@@ -10,15 +10,11 @@
 </div>
 
 <h5>Bierliste</h5>
-<div *ngIf="contest">
-  <div *ngFor="let b of contest.beers">
-    <mat-card>
-      <app-beer-item [beer]="b" [isEditable]="true">
-      </app-beer-item>
-      <button (click)="onDelete(b.id)" *ngIf="!isBusy">Löschen</button>
-    </mat-card>
-  </div>
-</div>
+<mat-card *ngFor="let b of contest.beers">
+  <app-beer-item [beer]="b" [isEditable]="true" (delete)="onDelete(b.id)">
+  </app-beer-item>
+</mat-card>
+
 
 <button *ngIf="!isBusy" (click)="onAdd()">Bier hinzufügen</button>
 

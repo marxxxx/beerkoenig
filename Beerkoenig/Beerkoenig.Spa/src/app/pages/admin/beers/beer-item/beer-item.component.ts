@@ -1,5 +1,5 @@
 import { AdminService } from './../../../../services/admin.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { BeerDefinitionModel } from '../../../../../models/BeerDefinitionModel';
 import { FileUploader, ParsedResponseHeaders, FileItem } from 'ng2-file-upload';
 import { Ng2ImgMaxService } from 'ng2-img-max';
@@ -17,9 +17,14 @@ export class BeerItemComponent implements OnInit {
   @Input()
   isEditable: boolean;
 
+  @Output()
+  delete: EventEmitter<any> = new EventEmitter<any>();
+
   uploader: FileUploader;
   isBusyUploading = false;
 
+  @ViewChild('fileUpload')
+  fileUpload: ElementRef;
 
 
   constructor(private imgMaxService: Ng2ImgMaxService,
@@ -53,6 +58,22 @@ export class BeerItemComponent implements OnInit {
     );
   }
 
+  onToggleBeerImage() {
+    console.log(this.fileUpload);
+    if (!this.beer.imageUrl) {
+      this.fileUpload.nativeElement.click();
+    } else {
+      this.beer.imageUrl = null;
+    }
+  }
+
+  getToolTipText(): string {
+    if (this.beer.imageUrl) {
+      return 'Klicken um Bild zu entfernen';
+    } else {
+      return 'Klicken um Bild auszuwählen';
+    }
+  }
 
   onSuccessfulUpload(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
     console.log('successfully uploaded file');
@@ -65,5 +86,13 @@ export class BeerItemComponent implements OnInit {
     return {
       url: this.adminService.getBeerImageUploadUrl()
     };
+  }
+
+  getBeerImage(): string {
+    if (!this.beer.imageUrl) {
+      return '/assets/img/beer-placeholder.jpg';
+    } else {
+      return this.beer.imageUrl;
+    }
   }
 }
