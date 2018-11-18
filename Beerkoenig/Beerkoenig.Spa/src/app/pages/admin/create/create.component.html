@@ -1,13 +1,15 @@
 <app-progress-spinner *ngIf="isBusy"></app-progress-spinner>
 
-<h3>Bierverkostung anlegen</h3>
+<div class="page-container">
+  <h3>Bierverkostung anlegen</h3>
 
-<form #createForm="ngForm">
-  <p>Bitte gib der Bierverkostung einen Namen:</p>
-  <input type="text" [(ngModel)]="contest.title" required name="title">
+  <form #createForm="ngForm">
+    <p>Bitte gib der Bierverkostung einen Namen:</p>
+    <input type="text" [(ngModel)]="contest.title" required name="title">
 
-  <p>Und wie heißt du?</p>
-  <input type="text" [(ngModel)]="contest.creatorUserName" required name="creatorName">
+    <p>Und wie heißt du?</p>
+    <input type="text" [(ngModel)]="contest.creatorUserName" required name="creatorName">
 
-  <button [disabled]="createForm.invalid" (click)="onCreate()">Anlegen</button>
-</form>
+    <button [disabled]="createForm.invalid" (click)="onCreate()">Anlegen</button>
+  </form>
+</div>

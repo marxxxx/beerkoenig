@@ -3,11 +3,13 @@ import { SwUpdate, SwPush } from '@angular/service-worker';
 import { MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { ContestStateService } from './services/contest-state.service';
+import { fadeAnimation } from './animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [fadeAnimation] // register the animation
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'Beerkoenig';

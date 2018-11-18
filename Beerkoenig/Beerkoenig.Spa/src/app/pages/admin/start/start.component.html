@@ -1,29 +1,32 @@
 <app-progress-spinner *ngIf="isBusy"></app-progress-spinner>
 
-<h3 *ngIf="!isStarted">
-  Bierverkostung starten
-</h3>
+<div class="page-container">
+  <h3 *ngIf="!isStarted">
+    Bierverkostung starten
+  </h3>
 
-<p *ngIf="!isStarted">Um die Bierverkostung zu starten bitte folgenden Knopf drücken:</p>
+  <p *ngIf="!isStarted">Um die Bierverkostung zu starten bitte folgenden Knopf drücken:</p>
 
-<button (click)="onStart()" *ngIf="!isBusy && !isStarted">Starten</button>
-
-
-<div *ngIf="isStarted">
-  <h3>Die Bierverkostung ist gestarted!</h3>
-
-  <p id="wichtig"> <strong>Wichtig!</strong> </p>
+  <button (click)="onStart()" *ngIf="!isBusy && !isStarted">Starten</button>
 
 
-  <div>
-    <p>Folgenden Link an deine Teilnehmer schicken:</p>
-    <textarea #participentArea readonly="true">{{participentLink}}</textarea>
-    <button (click)="onCopyToClipboard(participentArea)">In Zwischenablage kopieren</button>
-  </div>
+  <div *ngIf="isStarted">
+    <h3>Die Bierverkostung ist gestarted!</h3>
 
-  <div>
+    <p id="wichtig"> <strong>Wichtig!</strong> </p>
+
+
+    <div>
+      <p>Folgenden Link an deine Teilnehmer schicken:</p>
+      <textarea #participentArea readonly="true">{{participentLink}}</textarea>
+      <button (click)="onCopyToClipboard(participentArea)">In Zwischenablage kopieren</button>
+    </div>
+
+    <div>
       <p>Unter folgendem Link kannst du die Verkostung auflösen und abschließen:</p>
       <textarea #resolveArea readonly="true">{{resolveLink}}</textarea>
       <button (click)="onCopyToClipboard(resolveArea)">In Zwischenablage kopieren</button>
     </div>
+  </div>
+
 </div>

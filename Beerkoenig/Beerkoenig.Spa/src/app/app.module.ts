@@ -56,6 +56,7 @@ import { TeaseResultComponent } from './pages/participent/tease-result/tease-res
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,

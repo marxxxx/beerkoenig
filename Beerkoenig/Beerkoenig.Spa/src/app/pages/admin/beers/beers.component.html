@@ -1,22 +1,24 @@
 <app-progress-spinner *ngIf="isBusy" labelText="Bierverkostung wird angelegt ..."></app-progress-spinner>
 
-<h3>Bierauswahl</h3>
+<div class="page-container">
+  <h3>Bierauswahl</h3>
 
 
-<div *ngIf="contest">
-  <p>Ausgeschenkte Bieranzahl: {{contest.beerCount}}</p>
-  <!-- <input type="number" min="1" max="35" [(ngModel)]="contest.beerCount"> -->
-  <mat-slider min="1" max="35" value="1" [(ngModel)]="contest.beerCount"></mat-slider>
+  <div *ngIf="contest">
+    <p>Ausgeschenkte Bieranzahl: {{contest.beerCount}}</p>
+    <!-- <input type="number" min="1" max="35" [(ngModel)]="contest.beerCount"> -->
+    <mat-slider min="1" max="35" value="1" [(ngModel)]="contest.beerCount"></mat-slider>
+  </div>
+
+  <h5>Bierliste</h5>
+  <mat-card *ngFor="let b of contest.beers">
+    <app-beer-item [beer]="b" [isEditable]="true" (delete)="onDelete(b.id)">
+    </app-beer-item>
+  </mat-card>
+
+
+  <button *ngIf="!isBusy" (click)="onAdd()">Bier hinzufügen</button>
+
+  <button id="disabled" *ngIf="!isBusy" [disabled]="!isValid()" (click)="onCreate()">Bierverkostung
+    anlegen</button>
 </div>
-
-<h5>Bierliste</h5>
-<mat-card *ngFor="let b of contest.beers">
-  <app-beer-item [beer]="b" [isEditable]="true" (delete)="onDelete(b.id)">
-  </app-beer-item>
-</mat-card>
-
-
-<button *ngIf="!isBusy" (click)="onAdd()">Bier hinzufügen</button>
-
-<button id="disabled" *ngIf="!isBusy" [disabled]="!isValid()" (click)="onCreate()">Bierverkostung
-  anlegen</button>

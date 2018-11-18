@@ -3,7 +3,6 @@ button {
     text-transform: uppercase;
     color: #414141;
     display: block;
-    width: 70%;
     margin-top: 1rem;
     margin-left: auto;
     margin-right: auto;
@@ -18,7 +17,7 @@ button {
         transform: scale(1.1);
 
         &::after {
-            transform: scaleX(1.4) scaleY(1.6);
+            transform: scaleX(1.2) scaleY(1.2);
             opacity: 0;
         }
     }

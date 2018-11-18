@@ -1,22 +1,24 @@
 <app-progress-spinner *ngIf="isBusy"></app-progress-spinner>
-<h3>
-  Die Bierverkostung ist abgeschlossen!
-</h3>
+<div class="page-container">
+  <h3>
+    Die Bierverkostung ist abgeschlossen!
+  </h3>
 
 
-<ng-container *ngIf="contest && contest.results">
+  <ng-container *ngIf="contest && contest.results">
 
-  <p>Siegerliste:</p>
-  <app-contest-results [results]="contestResult"></app-contest-results>
+    <p>Siegerliste:</p>
+    <app-contest-results [results]="contestResult"></app-contest-results>
 
-  <ng-container *ngIf="participentResult && userName && !isTeasing">
-    <p>Das sind deine Ergebnisse, {{userName}}:</p>
-    <app-participent-results [results]="participentResult" [contestResults]="contest.results"></app-participent-results>
+    <ng-container *ngIf="participentResult && userName && !isTeasing">
+      <p>Das sind deine Ergebnisse, {{userName}}:</p>
+      <app-participent-results [results]="participentResult" [contestResults]="contest.results"></app-participent-results>
+    </ng-container>
+
+    <ng-container *ngIf="!isTeasing">
+      <p>Geschmackswertung:</p>
+      <app-taste-results [results]="contest.results"></app-taste-results>
+    </ng-container>
+
   </ng-container>
-
-  <ng-container *ngIf="!isTeasing">
-    <p>Geschmackswertung:</p>
-    <app-taste-results [results]="contest.results"></app-taste-results>
-  </ng-container>
-
-</ng-container>
+</div>

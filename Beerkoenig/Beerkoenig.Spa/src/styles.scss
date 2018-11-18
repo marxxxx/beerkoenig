@@ -15,23 +15,32 @@ html {
     font-family: 'Montserrat', sans-serif;
     color: #414141;
     font-size: 1.5rem;
-    text-align: center;
     height: 100%;
 }
 
-body {
-    margin: 1.5%;
+// body {
+//     margin: 1.5%;
+// }
+
+.page-container {
+    text-align: center;
 }
 
-@media screen and (max-width: 992px) {
-    body {
-        margin: 8%;
-    }
-    
-    html {
-        font-size: 1rem;
-    }
+router-outlet ~ * {
+    position: absolute;
+    height: 100%;
+    width: 95%;
   }
+
+// @media screen and (max-width: 992px) {
+//     body {
+//         margin: 8%;
+//     }
+    
+//     html {
+//         font-size: 1rem;
+//     }
+//   }
 
 
 

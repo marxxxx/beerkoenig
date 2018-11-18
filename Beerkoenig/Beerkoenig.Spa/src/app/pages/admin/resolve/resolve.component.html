@@ -1,12 +1,14 @@
 <app-progress-spinner *ngIf="isBusy || isBusyCompleting"></app-progress-spinner>
 <ng-container *ngIf="contest">
-  <h3>{{contest.title}} Auflösung</h3>
+  <div class="page-container">
+    <h3>{{contest.title}} Auflösung</h3>
 
-  <p>Bitte die ausgeschenkten Biere in der richtigen Reihenfolge erfassen:</p>
-  
-  <ng-container id="select" *ngIf="result">
-    <app-beer-resolve  *ngFor="let b of result" [beers]="contest.beers" [result]="b"></app-beer-resolve>
-  </ng-container>
+    <p>Bitte die ausgeschenkten Biere in der richtigen Reihenfolge erfassen:</p>
 
-  <button [disabled]="!isValid()" (click)="onResolve()">Auflösen</button>
-</ng-container> 
+    <ng-container id="select" *ngIf="result">
+      <app-beer-resolve *ngFor="let b of result" [beers]="contest.beers" [result]="b"></app-beer-resolve>
+    </ng-container>
+
+    <button [disabled]="!isValid()" (click)="onResolve()">Auflösen</button>
+  </div>
+</ng-container>
