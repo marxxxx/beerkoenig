@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BeerContestModel } from '../../../../models/BeerContestModel';
-import { Subscription } from 'rxjs';
+import { Subscription, forkJoin } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { AdminService } from '../../../services/admin.service';
 import { ResultService } from '../../../services/result.service';
@@ -22,6 +22,8 @@ export class ResultComponent implements OnInit {
   contestResult: ContestResultModel[] = [];
   participentResult: ParticipentResultModel[];
   userName: string;
+  isTeasing = false;
+  intervalId: any;
 
 
   constructor(private route: ActivatedRoute,
@@ -34,6 +36,7 @@ export class ResultComponent implements OnInit {
     this.load(contestId);
 
     this.userName = this.route.snapshot.queryParamMap.get('userName');
+    this.isTeasing = this.route.snapshot.queryParamMap.get('isTeasing') === 'true';
 
     // fallback for older links without username in query params
     if (!this.userName) {
@@ -51,26 +54,24 @@ export class ResultComponent implements OnInit {
   load(contestId: string) {
 
     this.isBusy = true;
-    this.adminService.getContest(contestId).subscribe(r => {
-      this.contest = r;
+
+    forkJoin(this.adminService.getContest(contestId),
+      this.resultService.getContestResults(contestId)
+    ).subscribe(([contest, results]) => {
       this.isBusy = false;
+      this.contest = contest;
+      results.forEach(r => r.position = results.indexOf(r) + 1);
+      if (this.isTeasing) {
+        this.runTeasing(results);
+      } else {
+        this.contestResult = results;
+      }
     }, e => {
       this.isBusy = false;
       console.error(e);
     });
-
-
-
-    this.resultService.getContestResults(contestId)
-      .subscribe(r => {
-        this.contestResult = r;
-      }, e => {
-        console.error(e);
-      });
-
-
-
   }
+
 
   loadParticipentResults(contestId: string, userName: string) {
 
@@ -80,6 +81,19 @@ export class ResultComponent implements OnInit {
       }, e => {
         console.error(e);
       });
+  }
+
+  runTeasing(results: ContestResultModel[]) {
+    let currentIndex = results.length;
+    this.intervalId = setInterval(() => {
+
+      this.contestResult = results.slice(currentIndex, results.length);
+      currentIndex = currentIndex - 1;
+      if (currentIndex < 0) {
+        clearInterval(this.intervalId);
+        setTimeout(() => this.isTeasing = false, 1000);
+      }
+    }, 1000);
   }
 
 }

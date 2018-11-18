@@ -36,7 +36,7 @@ export class VotingComponent implements OnInit {
       this.load(contestId);
 
       this.subs.push(this.stateService.contestFinished$.subscribe(_ => {
-        this.router.navigate(['/result', contestId], {queryParams: { userName: this.state.userName}});
+        this.router.navigate(['/tease', contestId], {queryParams: { userName: this.state.userName}});
 
       }));
     }));

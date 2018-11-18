@@ -31,6 +31,7 @@ import { ContestResultsComponent } from './components/contest-results/contest-re
 import { WelcomeAnimationComponent } from './components/welcome-animation/welcome-animation.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { Ng2ImgMaxModule } from 'ng2-img-max';
+import { TeaseResultComponent } from './pages/participent/tease-result/tease-result.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { Ng2ImgMaxModule } from 'ng2-img-max';
     TasteResultsComponent,
     ParticipentResultsComponent,
     ContestResultsComponent,
-    WelcomeAnimationComponent
+    WelcomeAnimationComponent,
+    TeaseResultComponent
   ],
   imports: [
     BrowserModule,

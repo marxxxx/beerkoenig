@@ -8,6 +8,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CreateComponent } from './pages/admin/create/create.component';
 import { BeersComponent } from './pages/admin/beers/beers.component';
+import { TeaseResultComponent } from './pages/participent/tease-result/tease-result.component';
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: ':contestId', component: WelcomeParticipentComponent },
   { path: 'voting/:contestId', component: VotingComponent },
   { path: 'result/:contestId', component: ResultComponent },
+  { path: 'tease/:contestId', component: TeaseResultComponent },
   { path: '', redirectTo: '/welcome', pathMatch: 'full'}
 ];
 

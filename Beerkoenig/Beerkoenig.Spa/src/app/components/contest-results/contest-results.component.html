@@ -1,5 +1,12 @@
 <table mat-table [dataSource]="results" class="mat-elevation-z1">
 
+    <!-- Correct Beers Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> Platz </th>
+      <td mat-cell *matCellDef="let result"> {{result.position}} </td>
+    </ng-container>
+
+    
   <!-- Correct Beers Column -->
   <ng-container matColumnDef="correctBeers">
     <th mat-header-cell *matHeaderCellDef> Richtige Biere </th>
