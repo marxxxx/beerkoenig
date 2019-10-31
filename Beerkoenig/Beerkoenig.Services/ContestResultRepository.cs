@@ -29,17 +29,25 @@ namespace Beerkoenig.Services
         }
 
 
-        public Task SaveContestResultsAsync(Guid contestId, List<ParticipentResultModel> result)
+        public async Task SaveContestResultsAsync(Guid contestId, List<ParticipentResultModel> result)
         {
-            var entities = result.Select(r => new ParticipentResultEntity(contestId.ToString(), r.UserName, r.BeerNumber, r.BeerId, r.IsCorrect)).ToList();
+            var entities = result
+                .Select(r => new ParticipentResultEntity(contestId.ToString(), r.UserName, r.BeerNumber, r.BeerId, r.IsCorrect))
+                .ToList();
             var table = StorageAccessService.GetTableReference(TableName);
-            var operation = new TableBatchOperation();
-            foreach(var e in entities)
-            {
-                operation.Add(TableOperation.Insert(e));
-            }
 
-            return table.ExecuteBatchAsync(operation);
+            var batches = entities.SplitList(100);
+
+            foreach (var batch in batches)
+            {
+                var operation = new TableBatchOperation();
+                foreach (var e in batch)
+                {
+                    operation.Add(TableOperation.Insert(e));
+                }
+
+                await table.ExecuteBatchAsync(operation);
+            }
         }
 
         public async Task<List<ContestResultModel>> GetContestResultAsync(Guid contestId)
