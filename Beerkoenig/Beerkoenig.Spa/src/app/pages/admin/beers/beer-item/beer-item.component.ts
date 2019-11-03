@@ -23,7 +23,7 @@ export class BeerItemComponent implements OnInit {
   uploader: FileUploader;
   isBusyUploading = false;
 
-  @ViewChild('fileUpload')
+  @ViewChild('fileUpload', { static: true })
   fileUpload: ElementRef;
 
 
