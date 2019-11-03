@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Beerkoenig.Api
@@ -26,14 +27,17 @@ namespace Beerkoenig.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddControllers();                
+
+            services.AddSignalR()
+                .AddAzureSignalR();
 
             services.AddCors();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "BeerKoenig API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BeerKoenig API", Version = "v1" });
 
             });
 
@@ -41,9 +45,9 @@ namespace Beerkoenig.Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            if (env.EnvironmentName == "Development")
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -62,16 +66,16 @@ namespace Beerkoenig.Api
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "BeerKoenig API V1");
             });
 
-            app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
+            app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200", "https://beerkoenig.azureedge.net").AllowCredentials());
 
             // Azure SignalR service
-            app.UseAzureSignalR(routes =>
+            app.UseHttpsRedirection();
+            app.UseRouting();
+            app.UseEndpoints(routes =>
             {
+                routes.MapControllers();
                 routes.MapHub<NotificationHub>("/notification");
             });
-
-            app.UseHttpsRedirection();
-            app.UseMvc();
 
         }
     }

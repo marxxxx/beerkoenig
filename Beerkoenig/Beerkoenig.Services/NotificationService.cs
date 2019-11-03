@@ -1,10 +1,10 @@
 ﻿using Beerkoenig.Services.Configuration;
 using Beerkoenig.Services.Interfaces;
 using Beerkoenig.Services.Models;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using WebPush;
 
 namespace Beerkoenig.Services
@@ -29,7 +29,7 @@ namespace Beerkoenig.Services
             foreach (var pushInfo in receivers)
             {
                 webPushClient.SendNotification(new PushSubscription(pushInfo.SubscriptionEndpoint, pushInfo.p256dh, pushInfo.Auth),
-                    JsonConvert.SerializeObject(pushMessage), vapidDetails);
+                    JsonSerializer.Serialize(pushMessage), vapidDetails);
             }
         }
     }

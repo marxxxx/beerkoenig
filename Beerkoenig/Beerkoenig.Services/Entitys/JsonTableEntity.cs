@@ -1,7 +1,7 @@
 ﻿using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Text.Json;
 
 namespace Beerkoenig.Services.Entitys
 {
@@ -29,7 +29,7 @@ namespace Beerkoenig.Services.Entitys
             {
                 if (string.IsNullOrEmpty(value.StringValue) == false)
                 {
-                    this.Entity = JsonConvert.DeserializeObject<T>(value.StringValue);
+                    this.Entity = JsonSerializer.Deserialize<T>(value.StringValue);
                 }
             }
         }
@@ -44,11 +44,10 @@ namespace Beerkoenig.Services.Entitys
 
             if (Entity != null)
             {
-                values.Add(JsonEntityColumnName, new EntityProperty(JsonConvert.SerializeObject(this.Entity)));
+                values.Add(JsonEntityColumnName, new EntityProperty(JsonSerializer.Serialize(this.Entity)));
             }
 
             return values;
         }
-
     }
 }
